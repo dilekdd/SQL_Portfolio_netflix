@@ -1,14 +1,68 @@
 ### **About this Dataset**
 
- Netflix is one of the most popular media and video streaming platforms. They have over 8000 movies or tv shows available on their platform, as of mid-2021, they have over 200M Subscribers globally. 
- 
- This tabular dataset consists of listings of all the movies and tv shows available on Netflix, along with details such as - cast, directors, ratings, release year, duration, etc.
+Netflix is one of the most popular media and video streaming platforms. They have over 8000 movies or TV shows available on their platform. As of mid-2021, they have over 200M Subscribers globally.
 
- Link to the dataset: https://www.kaggle.com/datasets/shivamb/netflix-shows 
+This tabular dataset consists of listings of all the movies and TV shows available on Netflix, along with details such as cast, directors, ratings, release year, duration, etc.
 
+Link to the dataset: https://www.kaggle.com/datasets/shivamb/netflix-shows
 
+---
 
- ### **Data Dictionary**
+### **Requirements**
+- **PostgreSQL**:
+  - This project uses PostgreSQL to store and query the dataset.
+  - Version: The dump file was created using PostgreSQL version 17.x. It is recommended to use the same or a compatible version to avoid issues during restoration.
+  - PostgreSQL is a free and open-source database system. You can download it [here](https://www.postgresql.org/download/).
+
+---
+
+### **Database Setup**
+1. **Install PostgreSQL**:
+   - If you don’t have PostgreSQL installed, follow the [official installation guide](https://www.postgresql.org/download/).
+
+2. **Create a Database**:
+   - Create a database where the dataset will be restored:
+     ```bash
+     psql -U your_username
+     CREATE DATABASE netflix;
+     \q
+     ```
+
+3. **Restore the Database**:
+   - Use the provided `netflix_dump.sql` file to restore the database:
+     ```bash
+     psql -U your_username -d netflix -f netflix_dump.sql
+     ```
+
+---
+
+### **How to Run**
+1. **Connect to the Database**:
+   - Open your terminal and connect to the `netflix` database:
+     ```bash
+     psql -U your_username -d netflix
+     ```
+
+2. **Execute Queries**:
+   - To execute queries directly, use:
+     ```sql
+     SELECT * FROM netflix_titles LIMIT 10;
+     ```
+
+   - Or execute queries from a file:
+     ```bash
+     \i path_to_query.sql
+     ```
+
+---
+
+### **Content**
+- **Queries**: Contains the SQL scripts for data analysis.
+- **Outputs**: Contains the results of the SQL queries in CSV format.
+
+---
+
+### **Data Dictionary**
 
 | **Column Name**       | **Data Type**    | **Description**                                                                                           |
 |------------------------|------------------|-----------------------------------------------------------------------------------------------------------|
@@ -45,22 +99,3 @@
    - Identifying trends in content releases by year or country.
    - Filtering content based on genres (`listed_in`) or ratings (`rating`).
    - Analyzing the popularity of actors and directors.
-
----
-
-This data dictionary provides an overview of the dataset's structure and can guide you in understanding and analyzing its contents effectively.
-
-### **Content**
-Queries: Contains the SQL scripts for data analysis.
-Outputs: Contains the results of the SQL queries in CSV format.
-
-### **Database Setup**
-To replicate the analysis or run the queries, set up the database using the netflix_dump.sql file:
-
-Restore the database using the netflix_dump.sql file:
-psql -U your_username -d your_database_name -f netflix_dump.sql
-
-### **How to Run**
-Use the following command to execute a query:
-
-psql -U your_username -d your_database -f path_to_query.sql
